@@ -1,0 +1,35 @@
+# ─────────────────────────────────────────────
+# Face Recognition System - Raspberry Pi 4
+# Install order matters on Pi:
+#   pip install -r requirements.txt --break-system-packages
+# ─────────────────────────────────────────────
+
+# Core vision
+opencv-python-headless==4.8.1.78   # headless = no GUI deps, lighter on Pi
+mediapipe==0.10.9                   # face detection + landmarks (CPU optimised)
+Pillow==10.2.0
+
+# Face recognition
+insightface==0.7.3                  # ArcFace embeddings
+onnxruntime==1.16.3                 # CPU inference engine for InsightFace on Pi
+
+# Fast similarity search
+faiss-cpu==1.7.4                    # nearest neighbour over embeddings
+
+# Liveness detection
+# Silent-Face-Anti-Spoofing runs via its own model files (see models/README)
+# We load it manually - no pip package needed
+
+# Utilities
+numpy==1.24.4
+scipy==1.11.4
+requests==2.31.0                    # HTTP calls to ERP API
+python-dotenv==1.0.0               # environment config
+loguru==0.7.2                      # clean logging
+pydantic==2.5.3                    # data validation
+
+# Arduino serial communication
+pyserial==3.5
+
+# Optional: only needed if you run the enrollment UI
+# flask==3.0.0

@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg:         #0e0e12;
+    --bg-2:       #14141a;
+    --bg-3:       #1c1c24;
+    --bg-4:       #242430;
+    --border:     #2a2a38;
+    --border-l:   #38384a;
+    --accent:     #c9a84c;
+    --accent-dim: #9a7a32;
+    --emerald:    #2dd4a0;
+    --crimson:    #e05c6b;
+    --sky:        #5ba4e8;
+    --text:       #e2e2ea;
+    --muted:      #70708a;
+    --dim:        #525268;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { font-size: 15px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-2); }
+  ::-webkit-scrollbar-thumb { background: var(--border-l); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  /* Selection */
+  ::selection { background: rgba(201, 168, 76, 0.2); color: var(--accent); }
+}
+
+@layer components {
+  /* Card */
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  /* Stat card accent line */
+  .card-accent-amber { border-top: 2px solid var(--accent); }
+  .card-accent-green { border-top: 2px solid var(--emerald); }
+  .card-accent-red   { border-top: 2px solid var(--crimson); }
+  .card-accent-sky   { border-top: 2px solid var(--sky); }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .badge-present { background: rgba(45,212,160,0.12); color: var(--emerald); border: 1px solid rgba(45,212,160,0.2); }
+  .badge-absent  { background: rgba(224,92,107,0.12); color: var(--crimson); border: 1px solid rgba(224,92,107,0.2); }
+  .badge-late    { background: rgba(201,168,76,0.12); color: var(--accent); border: 1px solid rgba(201,168,76,0.2); }
+  .badge-wfh     { background: rgba(91,164,232,0.12); color: var(--sky); border: 1px solid rgba(91,164,232,0.2); }
+  .badge-half    { background: rgba(201,168,76,0.08); color: var(--accent-dim); border: 1px solid rgba(201,168,76,0.15); }
+
+  /* Table */
+  .erp-table { width: 100%; border-collapse: collapse; }
+  .erp-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .erp-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(42,42,56,0.5);
+    font-size: 13px;
+    color: var(--text);
+  }
+  .erp-table tr:last-child td { border-bottom: none; }
+  .erp-table tbody tr:hover td { background: rgba(28,28,36,0.6); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary {
+    background: var(--accent);
+    color: #0e0e12;
+    font-weight: 600;
+  }
+  .btn-primary:hover:not(:disabled) { background: #d4b55a; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--border-l); color: var(--text); }
+  .btn-danger {
+    background: rgba(224,92,107,0.12);
+    color: var(--crimson);
+    border: 1px solid rgba(224,92,107,0.2);
+  }
+  .btn-danger:hover:not(:disabled) { background: rgba(224,92,107,0.2); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+
+  /* Input */
+  .erp-input {
+    width: 100%;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .erp-input:focus { border-color: var(--accent); }
+  .erp-input::placeholder { color: var(--dim); }
+
+  /* Select */
+  .erp-select {
+    appearance: none;
+    background: var(--bg-3) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2370708a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    padding: 9px 32px 9px 12px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .erp-select:focus { border-color: var(--accent); }
+
+  /* Label */
+  .erp-label {
+    display: block;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* Live dot */
+  .live-dot {
+    width: 7px; height: 7px;
+    background: var(--emerald);
+    border-radius: 50%;
+    animation: pulseDot 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* Mono number */
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* Page transition */
+  .page-enter { animation: slideUp 0.35s ease forwards; }
+}

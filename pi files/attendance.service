@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────────
+# attendance.service
+#
+# Installs the attendance system as a systemd service
+# so it starts automatically when the Pi boots.
+#
+# INSTALLATION:
+#   1. Edit WorkingDirectory and ExecStart paths below
+#   2. sudo cp attendance.service /etc/systemd/system/
+#   3. sudo systemctl daemon-reload
+#   4. sudo systemctl enable attendance
+#   5. sudo systemctl start attendance
+#
+# USEFUL COMMANDS:
+#   sudo systemctl status attendance     → check if running
+#   sudo journalctl -u attendance -f     → live logs
+#   sudo systemctl restart attendance    → restart
+#   sudo systemctl stop attendance       → stop
+# ─────────────────────────────────────────────
+
+[Unit]
+Description=Face Recognition Attendance System
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/facerec
+ExecStart=/usr/bin/python3 /home/pi/facerec/main.py --headless
+Restart=on-failure
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+
+# Give camera and serial port access
+SupplementaryGroups=video dialout
+
+# Logging goes to journald automatically
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
